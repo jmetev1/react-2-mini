@@ -8,11 +8,14 @@ export default class FamilyChanger extends Component {
     };
   }
 
-  // componentWillReceiveProps
-
+  componentWillReceiveProps(newProps) {
+    if (newProps.edit !== this.state.allowEdit) {
+      this.setState({allowEdit: newProps.edit})
+    }
+  }
   render() {
     return (
-      <select className="dropDownContainer">
+      <select onChange={(e) => {this.props.update(e.target.value)}} disabled={this.state.allowEdit === false} className="dropDownContainer">
         <option value="monospace"> Monospace </option>
         <option value="arial"> Arial </option>
         <option value="courier"> Courier </option>
